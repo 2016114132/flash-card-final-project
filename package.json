@@ -1,0 +1,23 @@
+{
+  "name": "flash-card-final-project",
+  "version": "1.0.0",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dair Aban",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "method-override": "^3.0.0",
+    "pg": "^8.14.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

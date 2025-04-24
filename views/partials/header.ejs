@@ -6,18 +6,24 @@
     <title><%= title %></title>
     <link rel="icon" type="image/x-icon" href="/images/flash-card-icon.png">
 
-    <!-- Load Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <!-- Load App Styles -->
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
     <header>
-      <div class="title">
-        <img src="/images/flash-card-icon.png" alt="Title Icon" >
-        <h1><%= title %></h1>
+      <div class="header-content">
+        <div class="title">
+          <img src="/images/flash-card-icon.png" alt="Title Icon">
+          <h1><%= title %></h1>
+        </div>
+        <div class="edit-stack">
+          <a href="/edit" class="edit-stack-btn">
+            <i class="fas fa-pencil-alt"></i> Edit Card Stack
+          </a>
+        </div>
       </div>
     </header>
+    
+    
 
     <div class="container">        

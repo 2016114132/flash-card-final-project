@@ -41,6 +41,35 @@ header .title h1 {
     font-size: 1.5rem;
 }
 
+header .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 2rem;
+}
+  
+.edit-stack-btn {
+  background-color: #ffffff;
+  color: #405189;
+  border: 1px solid #ffffff;
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.edit-stack-btn:hover {
+  background-color: #2e3d68;
+  color: #ffffff;
+  border: 1px solid white;
+}
+
+.edit-stack-btn i {
+  margin-right: 0.5rem;
+}
+
 /* Flash Card Styles */
 .flashcard-container {
     display: grid;
@@ -272,4 +301,101 @@ header .title h1 {
     100% {
         transform: translate(-50%, -50%) rotate(360deg);
     }
+}
+
+
+/* Edit Card Stack Styles */
+.edit-stack-container {
+    max-width: 900px;
+    margin: 120px auto 40px;
+    padding: 1rem;
+    background-color: #f9f9fb;
+}
+
+.card-form {
+    background: #fff;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.card-header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ccc;
+}
+
+.card-body {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;    
+}
+
+.form-group label {
+    font-size: 0.75rem;
+    margin-bottom: 0.3rem;
+    color: #777;
+    text-align: left;
+}
+
+.form-group input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 2px solid #405189;
+    background: transparent;
+    outline: none;
+}
+
+.add-card-section {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.add-card-btn {
+    background: none;
+    border: none;
+    color: #405189;
+    font-weight: bold;
+    cursor: pointer;
+    border-bottom: 3px solid #405189;
+    padding-bottom: 4px;
+    font-size: 1rem;
+}
+
+.save-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+.save-btn {
+    background-color: #405189;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+.save-btn:hover {
+    background-color: #2e3d68;
+    color: white;
 }

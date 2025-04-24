@@ -1,0 +1,69 @@
+<%- include("partials/header") %>
+
+<div class="edit-stack-container">
+  <form action="/save-stack" method="POST">
+    <div id="cardList">
+      <!-- Cards will be dynamically added here -->
+    </div>
+
+    <div class="add-card-section">
+      <button type="button" id="addCardBtn" class="add-card-btn">ADD A CARD</button>
+    </div>
+
+    <div class="save-button-container">
+      <button type="submit" class="save-btn">Save</button>
+    </div>
+  </form>
+</div>
+
+<%- include("partials/footer") %>
+
+<script>
+  let cardIndex = 1;
+
+  // Generate a new card input group
+  function createCardForm(index) {
+    return `
+      <div class="card-form">
+        <div class="card-header">
+          <span>${index}</span>
+          <button type="button" class="delete-btn" onclick="removeCard(this)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label>TERM</label>
+            <input type="text" name="cards[${index - 1}][front]" placeholder="Enter term" required>
+          </div>
+          <div class="form-group">
+            <label>DEFINITION</label>
+            <input type="text" name="cards[${index - 1}][back]" placeholder="Enter definition" required>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Remove card from the DOM
+  function removeCard(button) {
+    const card = button.closest('.card-form');
+    card.remove();
+    updateCardNumbers();
+  }
+
+  // Re-number cards after deletion
+  function updateCardNumbers() {
+    const cards = document.querySelectorAll('.card-form');
+    cards.forEach((card, idx) => {
+      card.querySelector('.card-header span').textContent = idx + 1;
+    });
+    cardIndex = cards.length + 1;
+  }
+
+  // Handle add card button
+  document.getElementById('addCardBtn').addEventListener('click', () => {
+    const newCardHTML = createCardForm(cardIndex++);
+    document.getElementById('cardList').insertAdjacentHTML('beforeend', newCardHTML);
+  });
+</script>

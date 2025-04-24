@@ -1,1 +1,24 @@
+<%- include("partials/header") %>
+
 <h1>Flash Card Home</h1>
+
+<div class="flashcard-container">
+    <!-- Flashcard Area -->
+    <div class="card-area">
+        <div class="card" id="card">
+          <div class="card-front">Front of Card</div>
+          <div class="card-back">Back of Card</div>
+        </div>
+    </div>
+  
+    <!-- Controls -->
+    <div class="controls">
+        <button id="prevBtn">Previous</button>
+        <button id="flipBtn">Flip</button>
+        <button id="nextBtn">Next</button>
+        <button id="shuffleBtn">Shuffle</button>
+        <div class="counter" id="counter">1 / 10 Cards</div>
+    </div>
+</div>
+
+<%- include("partials/footer") %>

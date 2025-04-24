@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    /* padding: 1rem 2rem; */
+    /* background-color: #f9f9f9;  */
+    background-color: #eeeeee;
+    text-align: center;
+    margin: 0px;
+    margin-top: 115px;
+}
+
+.container{
+    display: block;
+    max-width: 850px;
+    margin: auto;
+}
+
+/* Header Styles */
+header {    
+    position:fixed;
+    top: 0;
+    width: 100%;
+    background-color: #405189;
+    text-align: left;
+    color: white;
+    padding: 1rem 0;    
+    box-shadow: 0 4px 15px 8px rgba(128, 128, 128, 0.25);
+}
+
+header .title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 2rem;
+}
+
+header .title img {
+    height: 40px;      
+    margin-right: 10px;  
+}
+
+header .title h1 {
+    margin: 0px;
+    font-size: 1.5rem;
+}
+
+/* Flash Card Styles */
+.flashcard-container {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    width: 90%;
+    max-width: 600px;
+    gap: 1rem;
+    margin: auto;
+}
+
+.card-area {
+    display: grid;
+    place-items: center;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}

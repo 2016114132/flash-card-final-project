@@ -1,28 +1,26 @@
 body {
     font-family: Arial, sans-serif;
-    /* padding: 1rem 2rem; */
-    /* background-color: #f9f9f9;  */
     background-color: #eeeeee;
     text-align: center;
     margin: 0px;
     margin-top: 115px;
 }
 
-.container{
+.container {
     display: block;
     max-width: 850px;
     margin: auto;
 }
 
 /* Header Styles */
-header {    
-    position:fixed;
+header {
+    position: fixed;
     top: 0;
     width: 100%;
     background-color: #405189;
     text-align: left;
     color: white;
-    padding: 1rem 0;    
+    padding: 1rem 0;
     box-shadow: 0 4px 15px 8px rgba(128, 128, 128, 0.25);
 }
 
@@ -34,8 +32,8 @@ header .title {
 }
 
 header .title img {
-    height: 40px;      
-    margin-right: 10px;  
+    height: 40px;
+    margin-right: 10px;
 }
 
 header .title h1 {
@@ -46,18 +44,232 @@ header .title h1 {
 /* Flash Card Styles */
 .flashcard-container {
     display: grid;
-    grid-template-rows: 1fr auto;
-    width: 90%;
-    max-width: 600px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas:
+        "card card card card"
+        "counter prev next shuffle";
     gap: 1rem;
+    max-width: 700px;
+    width: 90%;
     margin: auto;
 }
 
-.card-area {
-    display: grid;
-    place-items: center;
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+/* Card area */
+.card {
+    grid-area: card;
+    width: 100%;
+    height: 440px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #ccc;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+/* Controls inside grid */
+.card-counter {
+    grid-area: counter;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: bold;
+}
+
+#prevContainer {
+    grid-area: prev;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#nextContainer {
+    grid-area: next;
+    display: flex;
+    justify-content: flex-start;
+}
+
+#shuffleContainer {
+    grid-area: shuffle;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.control-btn {
+    padding: 0.6rem 0.8rem;
+    font-size: 1.2rem;
+    background-color: #405189;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.control-btn:hover {
+    background-color: #2e3d68;
+}
+
+.control-btn i {
+    font-size: 1.2rem;
+}
+
+.control-btn:disabled {
+    background-color: #bfc5d8;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Card Enter & Exit Animation */
+.card-overlay-enter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    animation: slideInOverlay 0.4s ease forwards;
+    z-index: 2;
+}
+
+.card-overlay-exit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    animation: slideOutOverlay 0.4s ease forwards;
+    z-index: 2;
+}
+
+@keyframes slideInOverlay {
+    0% {
+        opacity: 0;
+        transform: translate(30%, -30%) scale(1.2);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+@keyframes slideOutOverlay {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(30%, -30%) scale(1.2);
+    }
+}
+
+/* Card Shuffle Animation */
+.card-shuffle-animate {
+    animation: shuffleZoomShake 0.6s ease-in-out;
+}
+
+@keyframes shuffleZoomShake {
+    0% {
+        transform: scale(0.95) rotate(0deg);
+    }
+    20% {
+        transform: scale(0.95) rotate(-2deg);
+    }
+    40% {
+        transform: scale(0.95) rotate(2deg);
+    }
+    60% {
+        transform: scale(0.95) rotate(-2deg);
+    }
+    80% {
+        transform: scale(0.95) rotate(2deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.card-inner .shuffle-overlay {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 2rem;
+    transform: translate(-50%, -50%);
+    color: #007bff;
+    z-index: 3;
+}
+
+.card-inner .shuffle-overlay img {
+    width: 75px;
+}
+
+.card-inner.shuffle-active .shuffle-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: shuffleSpin 0.75s linear infinite;
+}
+
+.card-inner.shuffle-active .card-front,
+.card-inner.shuffle-active .card-back {
+    visibility: hidden;
+}
+
+@keyframes shuffleSpin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }

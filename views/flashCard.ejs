@@ -1,24 +1,41 @@
 <%- include("partials/header") %>
 
-<h1>Flash Card Home</h1>
-
 <div class="flashcard-container">
-    <!-- Flashcard Area -->
-    <div class="card-area">
-        <div class="card" id="card">
-          <div class="card-front">Front of Card</div>
-          <div class="card-back">Back of Card</div>
+    <!-- Flashcard -->
+    <div class="card" id="card">
+        <div class="card-inner">
+          <div class="card-front" id="cardFront"></div>
+          <div class="card-back" id="cardBack"></div>          
+          <div class="shuffle-overlay" id="shuffleOverlay">
+            <img src="/images/shuffle-icon.png" alt="Shuffling" />
+          </div>     
         </div>
     </div>
-  
-    <!-- Controls -->
-    <div class="controls">
-        <button id="prevBtn">Previous</button>
-        <button id="flipBtn">Flip</button>
-        <button id="nextBtn">Next</button>
-        <button id="shuffleBtn">Shuffle</button>
-        <div class="counter" id="counter">1 / 10 Cards</div>
+
+    <!-- Card Counter -->
+    <div class="card-counter" id="counter">1 / 10 Cards</div>
+
+    <!-- Previous Button -->
+    <div class="ctrl-btn-container" id="prevContainer">
+        <button class="control-btn" id="prevBtn">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+    </div>
+
+    <!-- Next Button -->
+    <div class="ctrl-btn-container" id="nextContainer">
+        <button class="control-btn" id="nextBtn">
+            <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+
+    <!-- Shuffle Button -->
+    <div class="ctrl-btn-container" id="shuffleContainer">
+        <button class="control-btn" id="shuffleBtn">
+            <i class="fas fa-random"></i>
+        </button>
     </div>
 </div>
+  
 
 <%- include("partials/footer") %>

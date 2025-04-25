@@ -1,26 +1,29 @@
-// Temporary Flashcard data
-let cards = [
-    { front: "What does HTML stand for?", back: "HyperText Markup Language" },
-    { front: "What does CSS stand for?", back: "Cascading Style Sheets" },
-    { front: "What is the purpose of JavaScript?", back: "To make web pages interactive" },
-    { front: "What does SQL stand for?", back: "Structured Query Language" },
-    { front: "What is the output of `typeof null` in JavaScript?", back: "`object`" },
-    { front: "What does the '==' operator do in JavaScript?", back: "Compares values with type coercion" },
-    { front: "What does the '===' operator do?", back: "Compares values without type coercion (strict equality)" },
-    { front: "What is a function?", back: "A reusable block of code that performs a task" },
-    { front: "What is a variable?", back: "A container used to store data values" },
-    { front: "What keyword is used to declare a constant in JavaScript?", back: "`const`" },
-    { front: "What is a loop?", back: "A way to repeat a block of code multiple times" },
-    { front: "What is an array?", back: "A list-like object used to store multiple values" },
-    { front: "What is a for loop?", back: "A loop that repeats until a condition is false" },
-    { front: "What is recursion?", back: "A function that calls itself" },
-    { front: "What does DOM stand for?", back: "Document Object Model" },
-    { front: "What does API stand for?", back: "Application Programming Interface" },
-    { front: "What is a Git commit?", back: "A snapshot of changes in a repository" },
-    { front: "What is the purpose of `npm`?", back: "To manage packages for Node.js" },
-    { front: "What does JSON stand for?", back: "JavaScript Object Notation" },
-    { front: "What is a callback function?", back: "A function passed into another function as an argument" }
-  ];
+let cards = [];
+  
+fetch("/get-cards")
+  .then(response => response.json())
+  .then(data => {
+    cards = data;
+
+    if (cards.length === 0) {
+      cardFront.textContent = "No cards available";
+      cardBack.textContent = "Please add cards in Edit Stack";
+      counter.textContent = "0 / 0 Cards";
+
+      // Disable navigation buttons
+      document.getElementById('prevBtn').disabled = true;
+      document.getElementById('nextBtn').disabled = true;
+      return;
+    }
+
+    showCard(currentCard); // Now call showCard once data is ready
+  })
+  .catch(error => {
+    console.error("Failed to fetch cards:", error);
+    cardFront.textContent = "Error loading cards.";
+    cardBack.textContent = "";
+    counter.textContent = "";
+  });
   
   // Current card index
   let currentCard = 0;
@@ -30,6 +33,11 @@ let cards = [
   const cardFront = document.getElementById('cardFront');
   const cardBack = document.getElementById('cardBack');
   const counter = document.getElementById('counter');
+
+  // Show a loading message initially
+  cardFront.textContent = "Loading...";
+  cardBack.textContent = "";
+  counter.textContent = "";
   
   // Function to display and animate a specific card
   function showCard(index, direction = 'next') {
@@ -125,6 +133,6 @@ let cards = [
     showCard(currentCard, 'none');
   });
   
-  // Initial load
-  showCard(currentCard);
+  // // Initial load
+  // showCard(currentCard);
   

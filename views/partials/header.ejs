@@ -17,9 +17,15 @@
           <h1><%= title %></h1>
         </div>
         <div class="edit-stack">
-          <a href="/edit" class="edit-stack-btn">
-            <i class="fas fa-pencil-alt"></i> Edit Card Stack
-          </a>
+          <% if (pageID == "home") { %>
+            <a href="/edit" class="action-btn">
+              <i class="fas fa-pencil-alt"></i> Edit Card Stack
+            </a>
+          <% } else if (pageID == "edit") { %>
+            <a href="/" class="action-btn">
+              <i class="fa-solid fa-arrow-left"></i> Back
+            </a>
+          <% } %>          
         </div>
       </div>
     </header>

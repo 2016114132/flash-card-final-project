@@ -4,6 +4,10 @@
         <script src="/js/fontawesome.min.js"></script>
 
         <!-- Load App Script -->
-        <script src="/js/script.js"></script>
+        <% if (pageID == "home") { %>
+        <script src="/js/flash-card-script.js"></script>
+        <% } else if (pageID == "edit") { %>
+        <script src="/js/edit-stack-script.js"></script>
+        <% } %>
     </body>
 </html>

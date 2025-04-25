@@ -48,7 +48,7 @@ header .header-content {
     margin: 0 2rem;
 }
   
-.edit-stack-btn {
+.action-btn {
   background-color: #ffffff;
   color: #405189;
   border: 1px solid #ffffff;
@@ -60,13 +60,13 @@ header .header-content {
   transition: all 0.3s ease;
 }
 
-.edit-stack-btn:hover {
+.action-btn:hover {
   background-color: #2e3d68;
   color: #ffffff;
   border: 1px solid white;
 }
 
-.edit-stack-btn i {
+.action-btn i {
   margin-right: 0.5rem;
 }
 

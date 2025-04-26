@@ -78,7 +78,7 @@ export const addCard = async (req, res) => {
     res.status(201).json(newCard);
   } catch (error) {
     console.error("Error adding card:", error);
-    res.status(500).json({ error: "Failed to add card." });
+    res.status(500).json({ error: error.message });
   }
 };
 

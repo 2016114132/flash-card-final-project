@@ -4,7 +4,7 @@ let cardIndex = 1;
   function createCardForm(card = { id: null, front: '', back: '' }, index = 1) {
     const disabled = card.id ? 'disabled' : '';
     return `
-      <div class="card-form" data-id="${card.id || ''}">
+      <div id="card-${index}" class="card-form" data-id="${card.id || ''}">
         <div class="card-header">
           <span>${index}</span>
           <div>
@@ -22,11 +22,11 @@ let cardIndex = 1;
         <div class="card-body">
           <div class="form-group">
             <label>TERM</label>
-            <input type="text" value="${card.front}" ${disabled} required>
+            <input type="text" value="${card.front ?? ''}" ${disabled} required>
           </div>
           <div class="form-group">
             <label>DEFINITION</label>
-            <input type="text" value="${card.back}" ${disabled} required>
+            <input type="text" value="${card.back ?? ''}" ${disabled} required>
           </div>
         </div>
       </div>
@@ -39,6 +39,15 @@ let cardIndex = 1;
     card.querySelectorAll('input').forEach(input => input.disabled = false);
     card.querySelector('.edit-btn').style.display = 'none';
     card.querySelector('.save-btn').style.display = 'inline-block';
+  }
+
+  // Switch to new mode
+  function newCard(id){
+    const card = document.getElementById("card-" + id);
+    console.log("card-" + id);
+    // document.querySelector('#card-'+id+' .save-btn').style.display = 'inline-block';
+    // document.querySelector('#card-'+id+' .card-header div .edit-btn').style.display = 'none';
+    // document.querySelector('#card-'+id+' .delete-btn').style.display = 'none';
   }
 
   // Save card (update or add)
@@ -77,10 +86,18 @@ let cardIndex = 1;
       // New card - add it
       fetch("/cards", {
         method: "POST",
-        // headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ front, back })
       })
-      .then(res => res.json())
+      .then(async res => {
+        if (!res.ok) {
+          const error = (await res.json()).error;
+
+          console.log(error);
+          throw new Error(error);
+        }
+        return res.json();
+      })
       .then(newCard => {
         alert("Card added!");
         card.setAttribute('data-id', newCard.id);
@@ -91,7 +108,7 @@ let cardIndex = 1;
       })
       .catch(err => {
         console.error("Add failed:", err);
-        alert("Failed to add card.");
+        alert(err.message);
       });
     }
   }
@@ -153,5 +170,6 @@ let cardIndex = 1;
     document.getElementById('addCardBtn').addEventListener('click', () => {
       const html = createCardForm({}, cardIndex++);
       document.getElementById('cardList').insertAdjacentHTML('beforeend', html);
+      newCard(cardIndex);
     });
   });

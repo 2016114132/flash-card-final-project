@@ -1,4 +1,11 @@
-import { getAllCards, saveCardStack } from "../models/flashCardModel.js";
+import { 
+    getAllCards, 
+    saveCardStack,
+    addCardItem,
+    updateCardItem,
+    deleteCardItem 
+
+} from "../models/flashCardModel.js";
 const appTitle = "Flash Card App";
 
 export const getHome = async (req, res) => {
@@ -47,7 +54,7 @@ export const postSaveStack = async (req, res) => {
 };
 
 
-// Returns all cards as JSON
+// GET - Returns all cards as JSON
 export const getCards = async (req, res) => {
     try {
       const cards = await getAllCards();
@@ -58,3 +65,49 @@ export const getCards = async (req, res) => {
     }
 };
   
+// POST
+export const addCard = async (req, res) => {
+  try {
+    const { front, back } = req.body;
+
+    if (!front || !back) {
+      return res.status(400).json({ error: "Term and definition are required." });
+    }
+
+    const newCard = await addCardItem(front, back);
+    res.status(201).json(newCard);
+  } catch (error) {
+    console.error("Error adding card:", error);
+    res.status(500).json({ error: "Failed to add card." });
+  }
+};
+
+// PUT
+export const updateCard = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { front, back } = req.body;
+
+    if (!front?.trim() || !back?.trim()) {
+      return res.status(400).json({ error: "Term and definition are required." });
+    }
+
+    const updated = await updateCardItem(id, front, back);
+    res.json(updated);
+  } catch (error) {
+    console.error("Error updating card:", error);
+    res.status(500).json({ error: "Failed to update card." });
+  }
+};
+
+// DELETE
+export const deleteCard = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await deleteCardItem(id);
+    res.status(204).send();
+  } catch (error) {
+    console.error("Error deleting card:", error);
+    res.status(500).json({ error: "Failed to delete card." });
+  }
+};

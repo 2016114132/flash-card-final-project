@@ -15,7 +15,7 @@ export const saveCardStack = async (cards) => {
   }
 };
 
-export const addCard = async (front, back) => {
+export const addCardItem = async (front, back) => {
   const result = await query(
     "INSERT INTO cards (front, back) VALUES ($1, $2) RETURNING *",
     [front, back]
@@ -23,7 +23,7 @@ export const addCard = async (front, back) => {
   return result.rows[0];
 };
 
-export const updateCard = async (id, front, back) => {
+export const updateCardItem = async (id, front, back) => {
   const result = await query(
     "UPDATE cards SET front = $1, back = $2 WHERE id = $3 RETURNING *",
     [front, back, id]
@@ -31,6 +31,6 @@ export const updateCard = async (id, front, back) => {
   return result.rows[0];
 };
 
-export const deleteCard = async (id) => {
+export const deleteCardItem = async (id) => {
   await query("DELETE FROM cards WHERE id = $1", [id]);
 };

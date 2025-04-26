@@ -329,11 +329,24 @@ header .header-content {
     margin-bottom: 1rem;
 }
 
-.card-header button {
+/* .card-header button {
     background: none;
     border: none;
     cursor: pointer;
     color: #ccc;
+} */
+.card-header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #525e85;
+    font-size: 1.0rem;
+    margin-left: 0.5rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+.card-header button:hover {
+    color: #405189; 
+    transform: scale(1.2);
 }
 
 .card-body {
@@ -385,7 +398,7 @@ header .header-content {
     margin-top: 2rem;
 }
 
-.save-btn {
+/* .save-btn {
     background-color: #405189;
     color: white;
     border: none;
@@ -398,4 +411,4 @@ header .header-content {
 .save-btn:hover {
     background-color: #2e3d68;
     color: white;
-}
+} */

@@ -1,6 +1,6 @@
 import { 
     getAllCards, 
-    saveCardStack,
+    // saveCardStack,
     addCardItem,
     updateCardItem,
     deleteCardItem 
@@ -8,9 +8,11 @@ import {
 } from "../models/flashCardModel.js";
 const appTitle = "Flash Card App";
 
+// Shows the home screen
 export const getHome = async (req, res) => {
 
     try{  
+        // Get all cards to show on the page
         const cards = await getAllCards();
 
         res.render("flashCard", {
@@ -24,9 +26,11 @@ export const getHome = async (req, res) => {
     
 };
 
+// Shows the edit screen
 export const getEditStack = async (req, res) => {
 
     try{  
+        // Get all cards to show on the page
         const cards = await getAllCards();
 
         res.render("editStack", {
@@ -40,20 +44,6 @@ export const getEditStack = async (req, res) => {
     
 };
 
-export const postSaveStack = async (req, res) => {
-    try {
-      const cards = req.body.cards || [];
-      
-      await saveCardStack(cards);
-
-      res.redirect("/edit"); 
-    } catch (error) {
-      console.error("Error saving cards:", error);
-      res.status(500).send("Failed to save card stack.");
-    }
-};
-
-
 // GET - Returns all cards as JSON
 export const getCards = async (req, res) => {
     try {
@@ -65,11 +55,12 @@ export const getCards = async (req, res) => {
     }
 };
   
-// POST
+// POST - Adds a card
 export const addCard = async (req, res) => {
   try {
     const { front, back } = req.body;
 
+    // Validate input
     if (!front || !back) {
       return res.status(400).json({ error: "Term and definition are required." });
     }
@@ -82,13 +73,14 @@ export const addCard = async (req, res) => {
   }
 };
 
-// PUT
+// PUT - Updates a card
 export const updateCard = async (req, res) => {
   try {
     const { id } = req.params;
     const { front, back } = req.body;
 
-    if (!front?.trim() || !back?.trim()) {
+    // Validate input
+    if (!front || !back) {
       return res.status(400).json({ error: "Term and definition are required." });
     }
 
@@ -100,12 +92,13 @@ export const updateCard = async (req, res) => {
   }
 };
 
-// DELETE
+// DELETE - Removes a card
 export const deleteCard = async (req, res) => {
   try {
     const { id } = req.params;
+    
     await deleteCardItem(id);
-    res.status(204).send();
+    res.status(200).json({ message: "Card deleted successfully." });
   } catch (error) {
     console.error("Error deleting card:", error);
     res.status(500).json({ error: "Failed to delete card." });

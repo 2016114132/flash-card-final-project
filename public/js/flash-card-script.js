@@ -1,6 +1,7 @@
-let cards = [];
+  let cards = [];
   
-fetch("/get-cards")
+  // Gets all cards
+  fetch("/get-cards")
   .then(response => response.json())
   .then(data => {
     cards = data;
@@ -16,7 +17,7 @@ fetch("/get-cards")
       return;
     }
 
-    showCard(currentCard); // Now call showCard once data is ready
+    showCard(currentCard);
   })
   .catch(error => {
     console.error("Failed to fetch cards:", error);
@@ -40,7 +41,7 @@ fetch("/get-cards")
   counter.textContent = "";
   
   // Function to display and animate a specific card
-  function showCard(index, direction = 'next') {
+  function showCard(index, direction) {
     const cardContainer = document.getElementById('card');
   
     const currentFront = cards[index].front;
@@ -61,7 +62,7 @@ fetch("/get-cards")
         cardFront.textContent = currentFront;
         cardBack.textContent = currentBack;
         overlay.remove();
-        updateNavigationButtons(index); // update next/prev disabled state
+        updateNavigationButtons(index);
       }, 400);
   
     } else if (direction === 'prev') {
@@ -76,14 +77,14 @@ fetch("/get-cards")
   
       setTimeout(() => {
         overlay.remove();
-        updateNavigationButtons(index); // update next/prev disabled state
+        updateNavigationButtons(index);
       }, 400);
   
     } else {
       // Loads content to the card without any animation. This is used for when we shuffle or first initialize
       cardFront.textContent = currentFront;
       cardBack.textContent = currentBack;
-      updateNavigationButtons(index); // update next/prev disabled state
+      updateNavigationButtons(index);
     }
   
     // Track the current index
@@ -132,7 +133,4 @@ fetch("/get-cards")
     currentCard = 0;
     showCard(currentCard, 'none');
   });
-  
-  // // Initial load
-  // showCard(currentCard);
   

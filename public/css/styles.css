@@ -319,6 +319,12 @@ header .header-content {
     padding: 1rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
+.card-form.edit-mode {
+    background-color: #f1f5ff; 
+    border: 2px dashed #405189; 
+    box-shadow: 0 0 10px rgba(64, 81, 137, 0.2); 
+}
+  
 
 .card-header {
     display: flex;
@@ -329,19 +335,13 @@ header .header-content {
     margin-bottom: 1rem;
 }
 
-/* .card-header button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #ccc;
-} */
 .card-header button {
     background: none;
     border: none;
     cursor: pointer;
     color: #525e85;
-    font-size: 1.0rem;
-    margin-left: 0.5rem;
+    font-size: 1.1rem;
+    margin-left: 0.2rem;
     transition: color 0.3s ease, transform 0.2s ease;
 }
 .card-header button:hover {
@@ -387,9 +387,8 @@ header .header-content {
     color: #405189;
     font-weight: bold;
     cursor: pointer;
-    border-bottom: 3px solid #405189;
-    padding-bottom: 4px;
-    font-size: 1rem;
+    padding-bottom: 15px;
+    font-size: 1.25rem;
 }
 
 .save-button-container {
@@ -398,17 +397,41 @@ header .header-content {
     margin-top: 2rem;
 }
 
-/* .save-btn {
-    background-color: #405189;
+/* Toast Styles */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  
+  .toast {
     color: white;
-    border: none;
-    padding: 0.8rem 2rem;
+    padding: 0.8rem 1.2rem;
+    border-radius: 6px;
     font-size: 1rem;
-    border-radius: 100px;
-    cursor: pointer;
-}
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: fadeinout 3s forwards;
+  }
 
-.save-btn:hover {
-    background-color: #2e3d68;
-    color: white;
-} */
+  .toast.success{
+    background-color: #28a745!important;    
+  }
+
+  .toast.error{
+    background-color: #dc3545!important;    
+  }
+  
+  @keyframes fadeinout {
+    0% { opacity: 0; transform: translateY(-20px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+  }
+  

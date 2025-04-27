@@ -1,4 +1,4 @@
-# Flashboard Final Project
+# Flashcard Final Project
 
 This project was built with **Node.js**, **JavaScript**, **EJS**, **Express**, and **PostgreSQL**.  
 It allows users to create, view, edit, delete, and study flashcards through a flip-style web interface.
